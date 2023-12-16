@@ -13,13 +13,14 @@ int waitPrompt(char *buffer, char *prompt, int promptCount);
 
 char *strsplit(char *strbegin, char *strend);
 
-typedef struct commandsList
+typedef struct commandsList cmds_t;
+struct commandsList
 {
 	char *op;
 	char *cmd;
 	char **args;
-	cmd_t *next;
-} cmd_t;
+	cmds_t *next;
+};
 
 
 

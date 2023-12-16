@@ -10,53 +10,24 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	char *buffer;
-	cmd_t *cmds;
+	char input[1024];
+	//cmd_t *commands;
+	//int status;
 
-	init(&cmds, argv, argc);
-	buffer = malloc(sizeof(char) * MAX_BUFFER_SIZE);
-	if (buffer == NULL)
+	//init(&commands, argv, argc);
+
+	//status = shell_run(commands);
+	for (int i = 0; i < argc; i++)
 	{
-		perror("./shell");
-		exit(EXIT_FAILURE);
+        	printf("Argument %d: %s\n", i, argv[i]);
 	}
 
-	while (1)
+	if (fgets(input, sizeof(input), stdin) != NULL)
 	{
-		if (!waitPrompt(buffer, "#cisfun ", 9))
-			return (EXIT_SUCCESS);
-
-		if (access(buffer, X_OK) == 0)
-		{
-			pid_t pid = fork();
-
-			if (pid == -1)
-			{
-				perror("./shell");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid == 0)
-			{
-				if (execve(buffer, NULL, env) == -1)
-				{
-					perror("./shell");
-					exit(EXIT_FAILURE);
-				}
-			}
-			else
-			{
-				wait(NULL);
-
-			}
-		}
-		else
-		{
-			perror("./shell");
-		}
+		// Afficher l'entrée
+        	printf("Entrée reçue : %s", input);
 	}
 
-	free(buffer);
-
-	return (EXIT_SUCCESS);
+	return (0);
 }
 

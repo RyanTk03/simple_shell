@@ -1,7 +1,7 @@
 #include "shell.h"
 
 
-void tokenizer(char *commands, cmd_t *head)
+void cmdsTokenizer(char *commands, cmd_t *head)
 {
 	char *lastToken = command;
 	char *currentToken = strtok(command, "|&;");
@@ -12,7 +12,7 @@ void tokenizer(char *commands, cmd_t *head)
 		char *currentCommand = NULL;
 
 		currentCommand = strsplit(lastToken, currentToken);
-		pushCmd(head, currentCommand);
+		argsTokenizer(head, currentCommand);
 		
 		lastToken = currentToken;
 		currentToken = strtok(lastToken, "|&;");
@@ -22,4 +22,4 @@ void tokenizer(char *commands, cmd_t *head)
 }
 
 
-void pushCmd()
+void argsTokenizer()
